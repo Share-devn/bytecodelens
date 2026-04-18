@@ -1,0 +1,34 @@
+# Locale manifest — human-readable metadata for the winget CLI and website.
+# en-US is mandatory as the default; additional locales can be added later.
+PackageIdentifier: Share-devn.BytecodeLens
+PackageVersion: 1.0.0
+PackageLocale: en-US
+Publisher: Share-devn
+PublisherUrl: https://github.com/Share-devn
+PublisherSupportUrl: https://github.com/Share-devn/bytecodelens/issues
+Author: Share-devn
+PackageName: BytecodeLens
+PackageUrl: https://github.com/Share-devn/bytecodelens
+License: Apache-2.0
+LicenseUrl: https://github.com/Share-devn/bytecodelens/blob/main/LICENSE
+Copyright: Copyright (c) 2026 BytecodeLens contributors
+CopyrightUrl: https://github.com/Share-devn/bytecodelens/blob/main/LICENSE
+ShortDescription: The Java RE cockpit — decompile, attach, diff, patch.
+Description: |
+  BytecodeLens is a modern desktop reverse-engineering tool for Java / JVM bytecode.
+  Four decompilers with automatic fallback (CFR, Vineflower, Procyon, ASM skeleton),
+  live JVM attach with hot-reload, industrial hex viewer with Wireshark-style structure
+  overlay, 11 mapping formats, 11 deobfuscation passes, and a headless CLI.
+Moniker: bytecodelens
+Tags:
+  - java
+  - jvm
+  - bytecode
+  - decompiler
+  - reverse-engineering
+  - deobfuscation
+  - jvm-bytecode
+  - hex-viewer
+ReleaseNotesUrl: https://github.com/Share-devn/bytecodelens/releases/tag/v1.0.0
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0

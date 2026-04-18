@@ -1,0 +1,10 @@
+# PackageIdentifier + Version manifest — the "root" of a winget entry.
+# Paired with .installer.yaml and .locale.en-US.yaml in the winget-pkgs repo under:
+#   manifests/s/Share-devn/BytecodeLens/<version>/
+#
+# Spec: https://learn.microsoft.com/windows/package-manager/package/manifest
+PackageIdentifier: Share-devn.BytecodeLens
+PackageVersion: 1.0.0
+DefaultLocale: en-US
+ManifestType: version
+ManifestVersion: 1.6.0

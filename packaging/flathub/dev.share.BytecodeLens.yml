@@ -1,0 +1,71 @@
+# Flathub manifest for BytecodeLens.
+#
+# Install the app definition with flatpak-builder locally first, then submit to
+# Flathub via a PR against https://github.com/flathub/flathub.
+#
+# Refresh for a new release:
+#   1. Bump "tag" under sources → bytecodelens-source.
+#   2. Refresh the jar sha256 in `sources` → `url/sha256`:
+#        curl -sL \
+#          "https://github.com/Share-devn/bytecodelens/releases/download/vVERSION/BytecodeLens-VERSION-all.jar" \
+#          | sha256sum
+#   3. Bump <release version> in dev.share.BytecodeLens.metainfo.xml with today's date.
+
+app-id: dev.share.BytecodeLens
+runtime: org.freedesktop.Platform
+runtime-version: "23.08"
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk21
+command: bytecodelens
+finish-args:
+  # X11 + Wayland for JavaFX window rendering
+  - --share=ipc
+  - --socket=x11
+  - --socket=fallback-x11
+  - --socket=wayland
+  # Network for URL-loaded jars (File → Open from URL)
+  - --share=network
+  # Read + write access to the user's home, plus removable drives for opening jars
+  - --filesystem=home
+  - --filesystem=/media
+  # OpenGL for JavaFX prism-es2 rendering
+  - --device=dri
+  # Audio is optional (GlassUI notifications); enable if users complain about silence
+  # - --socket=pulseaudio
+
+modules:
+  - name: openjdk21
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk21/install.sh
+
+  - name: bytecodelens
+    buildsystem: simple
+    build-commands:
+      # Stage the jar into /app/lib, with a wrapper script at /app/bin/bytecodelens.
+      - install -Dm644 BytecodeLens-*-all.jar /app/lib/bytecodelens/bytecodelens.jar
+      - install -Dm755 bytecodelens.sh /app/bin/bytecodelens
+      - install -Dm644 dev.share.BytecodeLens.desktop /app/share/applications/dev.share.BytecodeLens.desktop
+      - install -Dm644 dev.share.BytecodeLens.metainfo.xml /app/share/metainfo/dev.share.BytecodeLens.metainfo.xml
+      # Icons at multiple sizes — Flathub's AppStream validator requires at least 128 and 256.
+      - install -Dm644 icon-128.png /app/share/icons/hicolor/128x128/apps/dev.share.BytecodeLens.png
+      - install -Dm644 icon-256.png /app/share/icons/hicolor/256x256/apps/dev.share.BytecodeLens.png
+      - install -Dm644 icon-512.png /app/share/icons/hicolor/512x512/apps/dev.share.BytecodeLens.png
+    sources:
+      - type: file
+        url: https://github.com/Share-devn/bytecodelens/releases/download/v1.0.0/BytecodeLens-1.0.0-all.jar
+        # PLACEHOLDER — refresh on every version bump.
+        sha256: 0000000000000000000000000000000000000000000000000000000000000000
+      - type: file
+        path: bytecodelens.sh
+      - type: file
+        path: dev.share.BytecodeLens.desktop
+      - type: file
+        path: dev.share.BytecodeLens.metainfo.xml
+      - type: file
+        path: icon-128.png
+      - type: file
+        path: icon-256.png
+      - type: file
+        path: icon-512.png

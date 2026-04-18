@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=BytecodeLens
+GenericName=Java Bytecode Tool
+Comment=The Java RE cockpit — decompile, attach, diff, patch
+Exec=bytecodelens %F
+Icon=dev.share.BytecodeLens
+Terminal=false
+Categories=Development;Debugger;IDE;
+Keywords=java;bytecode;decompiler;reverse-engineering;jvm;deobfuscation;hex;
+MimeType=application/java-archive;application/x-java-class;application/java;
+StartupNotify=true
+StartupWMClass=BytecodeLens

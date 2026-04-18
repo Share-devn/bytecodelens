@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>dev.share.BytecodeLens</id>
+  <launchable type="desktop-id">dev.share.BytecodeLens.desktop</launchable>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  <name>BytecodeLens</name>
+  <summary>The Java RE cockpit — decompile, attach, diff, patch</summary>
+
+  <description>
+    <p>
+      BytecodeLens is a modern desktop reverse-engineering workbench for Java and JVM bytecode.
+      It combines four decompilers (CFR, Vineflower, Procyon, and an ASM-based fallback) with an
+      Auto chain that falls through on failure, so you never see a blank tab. Open any .jar,
+      .war, .class, .zip, or .jmod file and browse it through a clean multi-panel UI.
+    </p>
+    <p>Features at a glance:</p>
+    <ul>
+      <li>Four decompilers with automatic fallback and a side-by-side Compare tab</li>
+      <li>Live JVM attach with a 9-tab inspector — heap, threads, CPU, deadlocks, hot-reload</li>
+      <li>Industrial hex viewer with Wireshark-style structure overlay for .class / ZIP / PNG</li>
+      <li>11 mapping formats (ProGuard, Tiny v1/v2, SRG, XSRG, TSRG, TSRG v2, CSRG, JOBF, Enigma, Recaf)</li>
+      <li>11 + 2 deobfuscation passes — dead code removal, opaque predicates, Kotlin data class restoration, enum name recovery, and more</li>
+      <li>Headless CLI for batch decompile / analyze / mapping conversion that skips the JavaFX runtime</li>
+      <li>Full Settings window with live-apply across 13 sections</li>
+    </ul>
+  </description>
+
+  <url type="homepage">https://github.com/Share-devn/bytecodelens</url>
+  <url type="bugtracker">https://github.com/Share-devn/bytecodelens/issues</url>
+  <url type="donation">https://github.com/Share-devn/bytecodelens</url>
+  <url type="help">https://github.com/Share-devn/bytecodelens/discussions</url>
+  <url type="vcs-browser">https://github.com/Share-devn/bytecodelens</url>
+
+  <developer id="io.github.share-devn">
+    <name>Share-devn</name>
+  </developer>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main window with project tree, decompiled view, and class info</caption>
+      <image>https://raw.githubusercontent.com/Share-devn/bytecodelens/v1.0.0/docs/img/hero.png</image>
+    </screenshot>
+  </screenshots>
+
+  <categories>
+    <category>Development</category>
+    <category>Debugger</category>
+    <category>IDE</category>
+  </categories>
+
+  <keywords>
+    <keyword>java</keyword>
+    <keyword>jvm</keyword>
+    <keyword>bytecode</keyword>
+    <keyword>decompiler</keyword>
+    <keyword>reverse-engineering</keyword>
+    <keyword>deobfuscation</keyword>
+    <keyword>hex-viewer</keyword>
+  </keywords>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="1.0.0" date="2026-04-18">
+      <description>
+        <p>First public release.</p>
+      </description>
+      <url>https://github.com/Share-devn/bytecodelens/releases/tag/v1.0.0</url>
+    </release>
+  </releases>
+
+  <provides>
+    <binary>bytecodelens</binary>
+  </provides>
+</component>

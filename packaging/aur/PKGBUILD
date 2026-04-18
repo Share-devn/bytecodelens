@@ -1,0 +1,54 @@
+# Maintainer: Share-devn <235978410+Share-devn@users.noreply.github.com>
+#
+# Update procedure on a new release:
+#   1. Bump pkgver to match the GitHub tag (without the leading "v").
+#   2. Bump pkgrel back to 1 for a new upstream version, or increment it if
+#      only the PKGBUILD itself changed.
+#   3. Refresh the sha256 sum:
+#        curl -sL "https://github.com/Share-devn/bytecodelens/releases/download/v${pkgver}/BytecodeLens-${pkgver}-all.jar" | sha256sum
+#   4. Regenerate .SRCINFO:  makepkg --printsrcinfo > .SRCINFO
+#   5. Test a clean build:   makepkg -sf
+#   6. Commit PKGBUILD + .SRCINFO to the AUR git repo and push.
+
+pkgname=bytecodelens
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="The Java RE cockpit — decompile, attach, diff, patch. Modern desktop tool for JVM bytecode."
+arch=('any')
+url="https://github.com/Share-devn/bytecodelens"
+license=('Apache-2.0')
+depends=('java-runtime>=21')
+makedepends=('imagemagick')
+source=(
+  "${pkgname}-${pkgver}.jar::https://github.com/Share-devn/bytecodelens/releases/download/v${pkgver}/BytecodeLens-${pkgver}-all.jar"
+  "${pkgname}.desktop"
+  "${pkgname}.sh"
+  "LICENSE::https://raw.githubusercontent.com/Share-devn/bytecodelens/v${pkgver}/LICENSE"
+  "icon.png::https://raw.githubusercontent.com/Share-devn/bytecodelens/v${pkgver}/icons/BytecodeLens-C1-avatar-512.png"
+)
+# PLACEHOLDER — refresh after every release. SKIP markers only for files that truly
+# change rarely; bump the jar checksum every time.
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP')
+
+package() {
+  # Application jar lives in /usr/share/java/ per Arch Java Package Guidelines.
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}.jar" \
+                 "${pkgdir}/usr/share/java/${pkgname}/${pkgname}.jar"
+
+  # CLI + GUI launcher — tiny shell wrapper that exec's java with the jar.
+  install -Dm755 "${srcdir}/${pkgname}.sh" "${pkgdir}/usr/bin/${pkgname}"
+
+  # Desktop entry + icons for GNOME / KDE application menus.
+  install -Dm644 "${srcdir}/${pkgname}.desktop" \
+                 "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+  install -Dm644 "${srcdir}/icon.png" \
+                 "${pkgdir}/usr/share/icons/hicolor/512x512/apps/${pkgname}.png"
+
+  # License — required by Arch packaging guidelines for non-common licenses.
+  install -Dm644 "${srcdir}/LICENSE" \
+                 "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
