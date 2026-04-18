@@ -1,0 +1,179 @@
+name: Release artifacts
+
+# Triggered either by pushing a v*.*.* tag, or manually from the Actions tab.
+# On tag push the resulting artefacts are uploaded directly to that release.
+# On manual dispatch they're kept as workflow artefacts for testing.
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # required to upload release assets
+
+jobs:
+  fat-jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      # Safety net: gradlew loses its executable bit when committed from Windows.
+      # `git update-index --chmod=+x` fixes it permanently, this line protects any
+      # future Windows-origin commits that forget to do it.
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+      - name: Build fat jar
+        run: ./gradlew shadowJar
+      - name: Rename for release clarity
+        shell: bash
+        run: mv build/libs/BytecodeLens-*-all.jar build/libs/BytecodeLens-all.jar
+      - name: Upload to release (on tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/BytecodeLens-all.jar
+      - name: Upload as workflow artefact (manual runs)
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: BytecodeLens-fat-jar
+          path: build/libs/BytecodeLens-*-all.jar
+
+  native-installers:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            jpackage-type: msi
+            suffix: windows-x64.msi
+          - os: macos-13            # Intel
+            jpackage-type: dmg
+            suffix: macos-x64.dmg
+          - os: macos-latest        # Apple Silicon
+            jpackage-type: dmg
+            suffix: macos-aarch64.dmg
+          - os: ubuntu-latest
+            jpackage-type: deb
+            suffix: linux-x64.deb
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Make gradlew executable (unix only)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: chmod +x gradlew
+
+      - name: Build runtime jar (non-shadow — jpackage adds its own deps)
+        shell: bash
+        run: ./gradlew jar
+
+      # Build order matters: copyRuntimeDeps is a Gradle Copy task that writes into
+       #   build/jpackage-input/ — run it FIRST, then overlay our own app.jar.
+       # Reversing this order is what was failing in the earlier run (the `cp`
+       # happened, then Gradle rewrote the directory without the jar).
+      - name: Stage jpackage input directory
+        shell: bash
+        run: |
+          ./gradlew -q copyRuntimeDeps
+          # The plain jar's name already has version in it — copy under a stable name
+          # so --main-jar doesn't need to interpolate the version.
+          cp build/libs/BytecodeLens-*.jar build/jpackage-input/app.jar
+          ls -la build/jpackage-input | head
+
+      # jpackage --app-version rejects "v1.0.0" (rejects letter prefixes on Windows
+       # because .msi ProductVersion must be numeric). Strip leading v.
+      - name: Compute clean version
+        id: version
+        shell: bash
+        run: |
+          raw="${{ github.ref_name }}"
+          if [ -z "$raw" ] || [ "$raw" = "main" ]; then
+            raw="1.0.0"
+          fi
+          clean="${raw#v}"
+          echo "value=$clean" >> "$GITHUB_OUTPUT"
+          echo "Using version: $clean"
+
+      - name: Run jpackage (Windows .msi)
+        if: matrix.os == 'windows-latest'
+        shell: bash
+        run: |
+          # Windows jpackage rejects PNG icons (wants .ico). For the first release we
+          # ship without a custom icon — jpackage uses its default JVM icon. A real .ico
+          # will be added once the SVG is converted via ImageMagick on the runner.
+          jpackage \
+            --type msi \
+            --name BytecodeLens \
+            --app-version "${{ steps.version.outputs.value }}" \
+            --vendor "BytecodeLens" \
+            --description "The Java RE cockpit" \
+            --input build/jpackage-input \
+            --main-jar app.jar \
+            --main-class dev.share.bytecodelens.Launcher \
+            --win-shortcut \
+            --win-menu \
+            --dest build/installers
+
+      - name: Run jpackage (macOS .dmg)
+        if: startsWith(matrix.os, 'macos')
+        shell: bash
+        run: |
+          # macOS jpackage expects .icns. Skipped for now — uses JVM default icon.
+          jpackage \
+            --type dmg \
+            --name BytecodeLens \
+            --app-version "${{ steps.version.outputs.value }}" \
+            --vendor "BytecodeLens" \
+            --description "The Java RE cockpit" \
+            --input build/jpackage-input \
+            --main-jar app.jar \
+            --main-class dev.share.bytecodelens.Launcher \
+            --dest build/installers
+
+      - name: Run jpackage (Linux .deb)
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          jpackage \
+            --type deb \
+            --name bytecodelens \
+            --app-version "${{ steps.version.outputs.value }}" \
+            --vendor "BytecodeLens" \
+            --description "The Java RE cockpit" \
+            --input build/jpackage-input \
+            --main-jar app.jar \
+            --main-class dev.share.bytecodelens.Launcher \
+            --icon icons/BytecodeLens-C1-avatar-512.png \
+            --linux-shortcut \
+            --dest build/installers
+
+      - name: Rename installer for clarity
+        shell: bash
+        run: |
+          cd build/installers
+          original=$(ls *)
+          mv "$original" "BytecodeLens-${{ matrix.suffix }}"
+
+      - name: Upload to release (on tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/installers/BytecodeLens-${{ matrix.suffix }}
+
+      - name: Upload as workflow artefact (manual runs)
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: BytecodeLens-${{ matrix.suffix }}
+          path: build/installers/BytecodeLens-${{ matrix.suffix }}

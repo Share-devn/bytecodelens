@@ -1,0 +1,2382 @@
+.root {
+    -fx-font-family: "Inter", "Segoe UI", "SF Pro Text", sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-smoothing-type: lcd;
+}
+
+.label, .text, .text-field, .text-area, .menu-item, .menu-bar,
+.tab-label, .tree-cell, .table-cell, .button, .toggle-button,
+.check-box, .radio-button, .combo-box, .list-cell, .tooltip {
+    -fx-font-smoothing-type: lcd;
+}
+
+/* ============ Toolbar & top ============ */
+
+.app-toolbar {
+    -fx-padding: 6 10 6 10;
+    -fx-spacing: 4;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: -color-bg-subtle;
+}
+
+/* Thinner vertical separators between toolbar groups so the bar feels structured
+   rather than noisy. The default JavaFX separator is too tall + too bold. */
+.app-toolbar .toolbar-separator {
+    -fx-padding: 0 6 0 6;
+    -fx-opacity: 0.55;
+}
+.app-toolbar .toolbar-separator .line {
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 1 0 0;
+}
+
+.app-toolbar .toolbar-search-icon {
+    -fx-icon-color: -color-fg-muted;
+    -fx-padding: 0 0 0 4;
+}
+
+.button-icon, .toolbar-btn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 6 8 6 8;
+    -fx-cursor: hand;
+}
+
+.button-icon:hover, .toolbar-btn:hover {
+    -fx-background-color: -color-bg-inset;
+}
+
+.button-icon:pressed, .toolbar-btn:pressed {
+    -fx-background-color: -color-neutral-subtle;
+}
+
+.button-icon:focused, .toolbar-btn:focused {
+    -fx-background-color: -color-bg-inset;
+}
+
+.button-icon:disabled, .toolbar-btn:disabled {
+    -fx-opacity: 0.35;
+    -fx-cursor: default;
+}
+
+.button-icon .ikonli-font-icon, .toolbar-btn .ikonli-font-icon {
+    -fx-icon-color: -color-fg-default;
+}
+
+.toolbar-btn:hover .ikonli-font-icon {
+    -fx-icon-color: -color-accent-fg;
+}
+
+.search-field {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+    -fx-padding: 4 8 4 8;
+}
+.search-field:focused {
+    -fx-border-color: -color-accent-emphasis;
+}
+
+/* ============ Panel headers ============ */
+
+.panel-header {
+    -fx-padding: 9 14 9 14;
+    -fx-spacing: 8;
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.panel-header-icon {
+    -fx-icon-color: -color-accent-fg;
+    -fx-opacity: 0.85;
+}
+
+.panel-title {
+    -fx-font-size: 10.5px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+    -fx-letter-spacing: 0.7px;
+    -fx-opacity: 0.85;
+}
+
+/* ============ Side panels ============ */
+
+.side-panel {
+    -fx-background-color: -color-bg-subtle;
+}
+
+.center-panel {
+    -fx-background-color: -color-bg-default;
+}
+
+.class-tree, .bookmarks-tree {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0 6 6 6;
+}
+
+/* Monospace for code-like content in tables */
+#constantPoolTable .table-cell,
+#methodsTable .table-cell,
+#fieldsTable .table-cell {
+    -fx-font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    -fx-font-size: 12px;
+}
+
+.tree-cell {
+    -fx-padding: 3 6 3 6;
+    -fx-background-color: transparent;
+    -fx-font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    -fx-font-size: 12px;
+}
+
+.tree-cell:selected, .tree-cell:selected:focused {
+    -fx-background-color: -color-accent-subtle;
+}
+
+.tree-icon {
+    -fx-padding: 0 6 0 0;
+}
+
+/* Classes / types */
+.icon-class      { -fx-icon-color: #3fb950; }
+.icon-interface  { -fx-icon-color: #58a6ff; }
+.icon-enum       { -fx-icon-color: #d2a8ff; }
+.icon-annotation { -fx-icon-color: #e3b341; }
+.icon-record     { -fx-icon-color: #f778ba; }
+.icon-module     { -fx-icon-color: #a5d6ff; }
+.icon-multi-release { -fx-icon-color: #f778ba; }
+.icon-comment    { -fx-icon-color: #f2cc60; }
+.icon-method     { -fx-icon-color: #d2a8ff; }
+.icon-field      { -fx-icon-color: #7ee787; }
+
+/* Decompile-status badges — dark theme */
+.icon-decompile-failed   { -fx-icon-color: #f85149; }
+.icon-decompile-fallback { -fx-icon-color: #e3b341; }
+
+.user-comment {
+    -fx-background-color: rgba(242, 204, 96, 0.08);
+    -fx-border-color: rgba(242, 204, 96, 0.35);
+    -fx-border-width: 0 0 0 3;
+    -fx-padding: 6 10 6 10;
+}
+.root.light-theme .user-comment {
+    -fx-background-color: rgba(154, 103, 0, 0.08);
+    -fx-border-color: rgba(154, 103, 0, 0.45);
+}
+
+/* Packages & folders */
+.icon-root       { -fx-icon-color: #e3b341; }
+.icon-package    { -fx-icon-color: #8b949e; }
+.icon-folder     { -fx-icon-color: #8b949e; }
+
+/* Native / nested archives */
+.icon-native-dll   { -fx-icon-color: #58a6ff; }
+.icon-native-so    { -fx-icon-color: #ffa657; }
+.icon-native-dylib { -fx-icon-color: #c9d1d9; }
+.icon-jar          { -fx-icon-color: #d29922; }
+.icon-war          { -fx-icon-color: #f778ba; }
+.icon-zip          { -fx-icon-color: #8b949e; }
+
+/* Config / text / data */
+.icon-manifest   { -fx-icon-color: #c9d1d9; }
+.icon-service    { -fx-icon-color: #a5d6ff; }
+.icon-properties { -fx-icon-color: #e3b341; }
+.icon-xml        { -fx-icon-color: #ffa657; }
+.icon-json       { -fx-icon-color: #f2cc60; }
+.icon-yaml       { -fx-icon-color: #f778ba; }
+.icon-text       { -fx-icon-color: #8b949e; }
+.icon-image      { -fx-icon-color: #79c0ff; }
+.icon-font       { -fx-icon-color: #d2a8ff; }
+.icon-sql        { -fx-icon-color: #58a6ff; }
+.icon-script     { -fx-icon-color: #3fb950; }
+.icon-binary     { -fx-icon-color: #f85149; }
+.icon-other      { -fx-icon-color: #6e7681; }
+
+.tree-icon-package {
+    -fx-icon-color: -color-fg-muted;
+}
+
+/* Light theme — slightly darker icon colors for contrast on white */
+.root.light-theme .icon-class      { -fx-icon-color: #1a7f37; }
+.root.light-theme .icon-interface  { -fx-icon-color: #0969da; }
+.root.light-theme .icon-enum       { -fx-icon-color: #8250df; }
+.root.light-theme .icon-annotation { -fx-icon-color: #9a6700; }
+.root.light-theme .icon-record     { -fx-icon-color: #bf3989; }
+.root.light-theme .icon-module     { -fx-icon-color: #0969da; }
+.root.light-theme .icon-method     { -fx-icon-color: #8250df; }
+.root.light-theme .icon-field      { -fx-icon-color: #1a7f37; }
+.root.light-theme .icon-decompile-failed   { -fx-icon-color: #cf222e; }
+.root.light-theme .icon-decompile-fallback { -fx-icon-color: #9a6700; }
+.root.light-theme .icon-multi-release { -fx-icon-color: #bf3989; }
+.root.light-theme .icon-root       { -fx-icon-color: #9a6700; }
+.root.light-theme .icon-package    { -fx-icon-color: #57606a; }
+.root.light-theme .icon-folder     { -fx-icon-color: #57606a; }
+.root.light-theme .icon-native-dll   { -fx-icon-color: #0969da; }
+.root.light-theme .icon-native-so    { -fx-icon-color: #953800; }
+.root.light-theme .icon-native-dylib { -fx-icon-color: #24292f; }
+.root.light-theme .icon-jar          { -fx-icon-color: #9a6700; }
+.root.light-theme .icon-war          { -fx-icon-color: #bf3989; }
+.root.light-theme .icon-zip          { -fx-icon-color: #57606a; }
+.root.light-theme .icon-manifest   { -fx-icon-color: #24292f; }
+.root.light-theme .icon-service    { -fx-icon-color: #0969da; }
+.root.light-theme .icon-properties { -fx-icon-color: #9a6700; }
+.root.light-theme .icon-xml        { -fx-icon-color: #953800; }
+.root.light-theme .icon-json       { -fx-icon-color: #7d4e00; }
+.root.light-theme .icon-yaml       { -fx-icon-color: #bf3989; }
+.root.light-theme .icon-text       { -fx-icon-color: #57606a; }
+.root.light-theme .icon-image      { -fx-icon-color: #0969da; }
+.root.light-theme .icon-font       { -fx-icon-color: #8250df; }
+.root.light-theme .icon-sql        { -fx-icon-color: #0969da; }
+.root.light-theme .icon-script     { -fx-icon-color: #1a7f37; }
+.root.light-theme .icon-binary     { -fx-icon-color: #cf222e; }
+.root.light-theme .icon-other      { -fx-icon-color: #6e7781; }
+
+/* ============ Class info ============ */
+
+.class-info .label {
+    -fx-font-size: 12px;
+}
+
+.info-key {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 10.5px;
+    -fx-font-weight: bold;
+}
+
+.info-value {
+    -fx-text-fill: -color-fg-default;
+    -fx-font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    -fx-font-size: 12px;
+}
+
+.info-value-link {
+    -fx-text-fill: -color-accent-fg;
+    -fx-cursor: hand;
+    -fx-underline: false;
+}
+
+.info-value-link:hover {
+    -fx-underline: true;
+}
+
+.info-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.info-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.info-scroll .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+
+.data-inspector .label {
+    -fx-font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    -fx-font-size: 11px;
+}
+
+/* ============ Status bar ============ */
+
+.status-bar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1 0 0 0;
+    -fx-font-size: 11px;
+}
+
+.status-dot {
+    -fx-icon-color: #3fb950;
+}
+
+.status-right {
+    -fx-text-overrun: LEADING_ELLIPSIS;
+    -fx-text-fill: -color-fg-muted;
+}
+
+/* Pill-shaped badges living on the right-hand side of the status bar. Inherit font-size
+   from .status-bar so they stay compact. Each colour variant only shifts the border/text
+   so the background stays consistent with the bar. */
+.status-badge {
+    -fx-padding: 2 8 2 8;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-color: -color-bg-inset;
+    -fx-border-color: -color-border-muted;
+    -fx-border-width: 1;
+}
+.status-badge .ikonli-font-icon {
+    -fx-icon-color: -color-fg-muted;
+}
+.status-badge Label {
+    -fx-text-fill: -color-fg-default;
+    -fx-font-size: 10.5px;
+}
+.status-badge-jar .ikonli-font-icon { -fx-icon-color: -color-accent-fg; }
+.status-badge-mapping .ikonli-font-icon { -fx-icon-color: #bf8700; }
+.root.dark-theme .status-badge-mapping .ikonli-font-icon { -fx-icon-color: #e3b341; }
+.status-badge-cache .ikonli-font-icon { -fx-icon-color: #1a7f37; }
+.root.dark-theme .status-badge-cache .ikonli-font-icon { -fx-icon-color: #3fb950; }
+
+/* Dark-theme scrollbar contrast (AtlantaFX default can look invisible in some places) */
+.root.dark-theme .scroll-bar:vertical .thumb,
+.root.dark-theme .scroll-bar:horizontal .thumb {
+    -fx-background-color: #484f58;
+    -fx-background-radius: 4;
+}
+
+.root.dark-theme .scroll-bar:vertical .thumb:hover,
+.root.dark-theme .scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: #6e7681;
+}
+
+/* Empty-state placeholders */
+.placeholder-icon {
+    -fx-icon-color: -color-fg-subtle;
+    -fx-opacity: 0.6;
+}
+
+.placeholder-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.placeholder-hint {
+    -fx-font-size: 11.5px;
+    -fx-text-fill: -color-fg-subtle;
+    -fx-text-alignment: CENTER;
+    -fx-max-width: 320;
+}
+
+.pattern-progress {
+    -fx-progress-color: -color-accent-emphasis;
+}
+
+.image-preview {
+    -fx-padding: 20;
+    -fx-background-color: -color-bg-subtle;
+}
+
+.image-scroll {
+    -fx-background-color: -color-bg-default;
+}
+
+.image-scroll > .viewport {
+    -fx-background-color: -color-bg-default;
+}
+
+.image-info {
+    -fx-padding: 6 10 6 10;
+    -fx-font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* ============ Search Overlay (Find in Jar) ============ */
+
+.search-overlay {
+    -fx-background-color: -color-bg-default;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 20, 0.2, 0, 4);
+    -fx-pref-width: 960;
+    -fx-max-width: 960;
+    -fx-pref-height: 520;
+    -fx-max-height: 520;
+}
+
+.search-overlay .search-icon {
+    -fx-icon-color: -color-fg-muted;
+}
+
+.search-main-field {
+    -fx-font-size: 14px;
+    -fx-pref-height: 32;
+    -fx-background-radius: 6;
+}
+
+.mode-btn {
+    -fx-background-radius: 5;
+    -fx-padding: 5 12 5 12;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 12px;
+}
+
+.mode-btn:hover {
+    -fx-background-color: -color-bg-inset;
+    -fx-text-fill: -color-fg-default;
+}
+
+.mode-btn:selected {
+    -fx-background-color: -color-accent-subtle;
+    -fx-text-fill: -color-accent-fg;
+    -fx-font-weight: bold;
+}
+
+.search-option-btn {
+    -fx-background-radius: 5;
+    -fx-padding: 5 8 5 8;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-min-width: 32;
+}
+
+.search-option-btn:hover {
+    -fx-background-color: -color-bg-inset;
+    -fx-text-fill: -color-fg-default;
+}
+
+.search-option-btn:selected {
+    -fx-background-color: -color-accent-subtle;
+    -fx-text-fill: -color-accent-fg;
+    -fx-border-color: -color-accent-emphasis;
+    -fx-border-radius: 5;
+}
+
+.search-filter-label {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11px;
+}
+
+.search-results-count {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11px;
+    -fx-padding: 2 0 2 4;
+}
+
+.search-results {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 4;
+}
+
+.search-results .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 2 2 2 2;
+}
+
+.search-results .list-cell:filled:hover {
+    -fx-background-color: -color-bg-inset;
+    -fx-background-radius: 5;
+}
+
+.search-results .list-cell:filled:selected {
+    -fx-background-color: -color-accent-subtle;
+    -fx-background-radius: 5;
+}
+
+.search-target {
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+    -fx-font-size: 12.5px;
+}
+
+.search-path {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+}
+
+.search-context {
+    -fx-text-fill: -color-fg-subtle;
+    -fx-font-size: 10.5px;
+    -fx-padding: 1 6 1 6;
+    -fx-background-color: -color-neutral-subtle;
+    -fx-background-radius: 3;
+}
+
+.search-line-no {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-min-width: 44;
+    -fx-alignment: CENTER_RIGHT;
+}
+
+.search-snippet {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+}
+
+.search-snippet-text {
+    -fx-fill: -color-fg-default;
+}
+
+.search-snippet-match {
+    -fx-fill: -color-accent-fg;
+    -fx-font-weight: bold;
+}
+
+.search-kind-icon {
+    -fx-icon-color: -color-fg-muted;
+}
+
+.search-results .list-cell:filled:selected .search-snippet-text,
+.search-results .list-cell:filled:selected .search-target,
+.search-results .list-cell:filled:selected .search-path {
+    -fx-fill: -color-fg-default;
+    -fx-text-fill: -color-fg-default;
+}
+
+/* Light theme snippet match */
+.root.light-theme .search-snippet-match {
+    -fx-fill: #9a3412;
+    -fx-font-weight: bold;
+}
+
+/* ============ Pattern Panel ============ */
+
+.pattern-panel {
+    -fx-background-color: -color-bg-default;
+}
+
+.pattern-toolbar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.pattern-run-btn {
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-success-fg;
+}
+
+.pattern-status {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.pattern-left {
+    -fx-background-color: -color-bg-default;
+}
+
+.pattern-right {
+    -fx-background-color: -color-bg-subtle;
+}
+
+.pattern-results {
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+
+.pattern-results .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 2;
+}
+
+.pattern-results .list-cell:filled:hover {
+    -fx-background-color: -color-bg-inset;
+    -fx-background-radius: 4;
+}
+
+.pattern-results .list-cell:filled:selected {
+    -fx-background-color: -color-accent-subtle;
+    -fx-background-radius: 4;
+}
+
+.pattern-result-label {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-fg-default;
+}
+
+.pattern-result-icon {
+    -fx-icon-color: -color-accent-emphasis;
+}
+
+/* BLPL regex highlighting */
+.root.dark-theme .code-view .code-regex { -fx-fill: #f2cc60; }
+.root.light-theme .code-view .code-regex { -fx-fill: #9a6700; }
+.root.dark-theme .code-view .code-operator { -fx-fill: #8b949e; }
+.root.light-theme .code-view .code-operator { -fx-fill: #6e7781; }
+
+/* ============ Match highlights ============ */
+
+.root.dark-theme .code-view .match-highlight {
+    -rtfx-background-color: #48451a;
+    -fx-fill: #ffeaa0;
+}
+
+.root.dark-theme .code-view .match-highlight-primary {
+    -rtfx-background-color: #8a6f00;
+    -fx-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.root.light-theme .code-view .match-highlight {
+    -rtfx-background-color: #fff8c5;
+    -fx-fill: #24292f;
+}
+
+.root.light-theme .code-view .match-highlight-primary {
+    -rtfx-background-color: #fae17d;
+    -fx-fill: #1f2328;
+    -fx-font-weight: bold;
+}
+
+/*
+ * Hover highlight — activated after a short delay when the pointer dwells on an
+ * identifier. Two tiers: the token directly under the cursor (primary, brighter)
+ * and every other occurrence in the document (secondary, dim).
+ *
+ * Picked distinctly from match-highlight so a search match visually "wins" when
+ * both land on the same word — match is amber, hover is blue-ish.
+ */
+.root.dark-theme .code-view .hover-highlight {
+    -rtfx-background-color: rgba(88, 166, 255, 0.12);
+}
+.root.dark-theme .code-view .hover-highlight-primary {
+    -rtfx-background-color: rgba(88, 166, 255, 0.28);
+}
+.root.light-theme .code-view .hover-highlight {
+    -rtfx-background-color: rgba(9, 105, 218, 0.10);
+}
+.root.light-theme .code-view .hover-highlight-primary {
+    -rtfx-background-color: rgba(9, 105, 218, 0.22);
+}
+
+/*
+ * Ctrl-hold hover underline — the token that would be navigated to if the user
+ * clicked right now. Only painted when onSymbolClick is wired AND Ctrl/Cmd is
+ * held. JADX uses a similar treatment.
+ */
+.root.dark-theme .code-view .ctrl-hover-underline {
+    -fx-underline: true;
+    -fx-fill: #58a6ff;
+}
+.root.light-theme .code-view .ctrl-hover-underline {
+    -fx-underline: true;
+    -fx-fill: #0969da;
+}
+
+/* ============ Find Bar (local find in file) ============ */
+
+.find-bar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.find-bar-icon {
+    -fx-icon-color: -color-fg-muted;
+}
+
+.find-bar-field {
+    -fx-background-radius: 4;
+}
+
+.find-bar-counter {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 0 8 0 0;
+}
+
+.find-bar-option, .find-bar-nav {
+    -fx-background-color: transparent;
+    -fx-background-radius: 4;
+    -fx-padding: 4 6 4 6;
+    -fx-min-width: 28;
+    -fx-cursor: hand;
+}
+
+.find-bar-option .ikonli-font-icon,
+.find-bar-nav .ikonli-font-icon {
+    -fx-icon-color: -color-fg-muted;
+}
+
+.find-bar-option:hover, .find-bar-nav:hover {
+    -fx-background-color: -color-bg-inset;
+}
+
+.find-bar-option:selected {
+    -fx-background-color: -color-accent-subtle;
+}
+
+.find-bar-option:selected .ikonli-font-icon {
+    -fx-icon-color: -color-accent-emphasis;
+}
+
+.find-bar-option:selected {
+    -fx-text-fill: -color-accent-fg;
+}
+
+/* ============ Usage Panel ============ */
+
+.usage-panel {
+    -fx-background-color: -color-bg-default;
+}
+
+.usage-header-bar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.usage-header {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-fg-default;
+    -fx-font-weight: bold;
+}
+
+.usage-list {
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+
+.usage-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 2;
+}
+
+.usage-list .list-cell:filled:hover {
+    -fx-background-color: -color-bg-inset;
+    -fx-background-radius: 4;
+}
+
+.usage-list .list-cell:filled:selected {
+    -fx-background-color: -color-accent-subtle;
+    -fx-background-radius: 4;
+}
+
+.usage-icon {
+    -fx-icon-color: -color-accent-emphasis;
+}
+
+.usage-kind {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 10.5px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 1 6 1 6;
+    -fx-background-color: -color-neutral-subtle;
+    -fx-background-radius: 3;
+}
+
+.usage-location {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-fg-default;
+    -fx-font-weight: bold;
+}
+
+.usage-target {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11.5px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.usage-snippet {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 10.5px;
+    -fx-text-fill: -color-fg-subtle;
+    -fx-opacity: 0.8;
+}
+
+.usage-line {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 10.5px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 0 6 0 0;
+}
+
+/* ============ Jar Diff ============ */
+
+.diff-header {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.diff-header-title {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-fg-default;
+}
+
+.diff-stat {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.diff-stat-muted {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 10px;
+    -fx-text-fill: -color-fg-subtle;
+}
+
+.diff-split {
+    -fx-background-color: -color-bg-default;
+}
+
+.diff-detail {
+    -fx-background-color: -color-bg-default;
+}
+
+.diff-detail-title {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+}
+
+.diff-section-title {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 10 0 4 0;
+}
+
+.diff-detail-line {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-fg-default;
+}
+
+.diff-hint {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 12px;
+}
+
+/* change-type colors (dark theme defaults) */
+.diff-added    { -fx-text-fill: #3fb950; -fx-font-weight: bold; }
+.diff-removed  { -fx-text-fill: #f85149; -fx-font-weight: bold; }
+.diff-modified { -fx-text-fill: #e3b341; -fx-font-weight: bold; }
+.diff-unchanged{ -fx-text-fill: -color-fg-muted; }
+
+.root.light-theme .diff-added    { -fx-text-fill: #1a7f37; }
+.root.light-theme .diff-removed  { -fx-text-fill: #cf222e; }
+.root.light-theme .diff-modified { -fx-text-fill: #9a6700; }
+
+.diff-icon-added    { -fx-icon-color: #3fb950; }
+.diff-icon-removed  { -fx-icon-color: #f85149; }
+.diff-icon-modified { -fx-icon-color: #e3b341; }
+.diff-icon-unchanged{ -fx-icon-color: -color-fg-muted; }
+
+.root.light-theme .diff-icon-added    { -fx-icon-color: #1a7f37; }
+.root.light-theme .diff-icon-removed  { -fx-icon-color: #cf222e; }
+.root.light-theme .diff-icon-modified { -fx-icon-color: #9a6700; }
+
+.diff-member-icon-added    { -fx-icon-color: #3fb950; }
+.diff-member-icon-removed  { -fx-icon-color: #f85149; }
+.diff-member-icon-modified { -fx-icon-color: #e3b341; }
+
+.diff-member-row-added {
+    -fx-background-color: rgba(63, 185, 80, 0.1);
+    -fx-background-radius: 4;
+}
+.diff-member-row-removed {
+    -fx-background-color: rgba(248, 81, 73, 0.1);
+    -fx-background-radius: 4;
+}
+.diff-member-row-modified {
+    -fx-background-color: rgba(227, 179, 65, 0.1);
+    -fx-background-radius: 4;
+}
+
+.diff-member-kind {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 10px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 1 6 1 6;
+    -fx-background-color: -color-neutral-subtle;
+    -fx-background-radius: 3;
+    -fx-min-width: 52;
+}
+
+.diff-member-label {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-fg-default;
+}
+
+.diff-member-detail {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.diff-member-scroll {
+    -fx-background-color: transparent;
+}
+
+.diff-member-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.diff-side-header {
+    -fx-background-color: -color-bg-subtle;
+    -fx-padding: 6 12 6 12;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.diff-tabs .tab-header-background {
+    -fx-background-color: -color-bg-subtle;
+}
+
+/* ============ Hierarchy Panel ============ */
+
+.hierarchy-panel {
+    -fx-background-color: -color-bg-default;
+}
+
+.hierarchy-header-bar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.hierarchy-header {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-fg-default;
+    -fx-font-weight: bold;
+}
+
+.hierarchy-side {
+    -fx-background-color: -color-bg-default;
+}
+
+.hierarchy-side-icon {
+    -fx-icon-color: -color-fg-muted;
+}
+
+.hierarchy-tree {
+    -fx-background-color: transparent;
+    -fx-padding: 0 4 4 4;
+}
+
+.hierarchy-cell {
+    -fx-background-color: transparent;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+    -fx-padding: 3 6 3 6;
+}
+
+.hierarchy-cell:filled:hover {
+    -fx-background-color: -color-bg-inset;
+}
+
+.hierarchy-cell:filled:selected {
+    -fx-background-color: -color-accent-subtle;
+}
+
+.hierarchy-cell-external {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-style: italic;
+}
+
+.hierarchy-cell-internal {
+    -fx-text-fill: -color-fg-default;
+}
+
+.hierarchy-icon {
+    -fx-icon-color: -color-fg-default;
+}
+
+.hierarchy-icon-class           { -fx-icon-color: #3fb950; }
+.hierarchy-icon-interface       { -fx-icon-color: #58a6ff; }
+.hierarchy-icon-abstract_class  { -fx-icon-color: #79c0ff; }
+.hierarchy-icon-enum            { -fx-icon-color: #d2a8ff; }
+.hierarchy-icon-annotation      { -fx-icon-color: #e3b341; }
+.hierarchy-icon-record          { -fx-icon-color: #f778ba; }
+.hierarchy-icon-external        { -fx-icon-color: #6e7681; }
+
+.root.light-theme .hierarchy-icon-class           { -fx-icon-color: #1a7f37; }
+.root.light-theme .hierarchy-icon-interface       { -fx-icon-color: #0969da; }
+.root.light-theme .hierarchy-icon-abstract_class  { -fx-icon-color: #0969da; }
+.root.light-theme .hierarchy-icon-enum            { -fx-icon-color: #8250df; }
+.root.light-theme .hierarchy-icon-annotation      { -fx-icon-color: #9a6700; }
+.root.light-theme .hierarchy-icon-record          { -fx-icon-color: #bf3989; }
+.root.light-theme .hierarchy-icon-external        { -fx-icon-color: #6e7781; }
+
+/* ============ Decompiler selector & compare view ============ */
+
+.decompiler-toolbar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.decompiler-toolbar > .label {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11px;
+}
+
+.decompiler-selector {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+    -fx-background-radius: 5;
+    -fx-min-width: 140;
+}
+
+.decompiler-status {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.compare-column-head {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.compare-column-header {
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-fg-default;
+}
+
+.compare-column-status {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.compare-split > .split-pane-divider {
+    -fx-padding: 0 1 0 1;
+    -fx-background-color: -color-border-default;
+}
+
+/* ============ Call Graph ============ */
+
+.callgraph-panel {
+    -fx-background-color: -color-bg-default;
+}
+
+.callgraph-toolbar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.callgraph-toolbar > .label {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11px;
+}
+
+.callgraph-status {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1 0 0 0;
+}
+
+.callgraph-status-title {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-weight: bold;
+}
+
+.callgraph-status-value {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-default;
+}
+
+.callgraph-empty {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 13px;
+}
+
+.callgraph-placeholder {
+    -fx-background-color: -color-bg-default;
+}
+
+.callgraph-canvas {
+    -fx-background-color: -color-bg-default;
+}
+
+.callgraph-scroll {
+    -fx-background-color: -color-bg-default;
+}
+
+.callgraph-scroll > .viewport {
+    -fx-background-color: -color-bg-default;
+}
+
+/* IDA-style rectangular blocks */
+.graph-block {
+    -fx-cursor: hand;
+    -fx-stroke-width: 1.5;
+}
+
+.graph-block-class {
+    -fx-fill: #161b22;
+    -fx-stroke: #3fb950;
+}
+
+.graph-block-method {
+    -fx-fill: #161b22;
+    -fx-stroke: #58a6ff;
+}
+
+.graph-block-external {
+    -fx-fill: #0d1117;
+    -fx-stroke: #6e7681;
+    -fx-stroke-dash-array: 4 4;
+}
+
+.graph-block-root {
+    -fx-stroke: #f2cc60;
+    -fx-stroke-width: 2.5;
+    -fx-effect: dropshadow(gaussian, rgba(242, 204, 96, 0.45), 15, 0.3, 0, 0);
+}
+
+.graph-block:hover {
+    -fx-stroke-width: 2.5;
+}
+
+.graph-block-title {
+    -fx-fill: #c9d1d9;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-mouse-transparent: true;
+}
+
+.graph-block-sub {
+    -fx-fill: #6e7681;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 10px;
+    -fx-mouse-transparent: true;
+}
+
+.callgraph-minimap {
+    -fx-background-color: rgba(13, 17, 23, 0.9);
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: crosshair;
+}
+
+.callgraph-minimap-viewport {
+    -fx-mouse-transparent: true;
+}
+
+.graph-block-meta {
+    -fx-fill: #8b949e;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 10px;
+    -fx-mouse-transparent: true;
+}
+
+.graph-block-match {
+    -fx-stroke: #f2cc60;
+    -fx-stroke-width: 3;
+    -fx-effect: dropshadow(gaussian, rgba(242, 204, 96, 0.5), 12, 0.4, 0, 0);
+}
+
+.graph-edge-hot {
+    -fx-stroke: #ff8c42;
+}
+
+.graph-arrow.graph-edge-hot {
+    -fx-fill: #ff8c42;
+}
+
+.graph-edge-weight {
+    -fx-fill: #d29922;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-mouse-transparent: true;
+}
+
+.callgraph-breadcrumb-bar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.callgraph-breadcrumb-label {
+    -fx-font-size: 10px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.callgraph-breadcrumb {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-background-color: transparent;
+    -fx-padding: 2 6 2 6;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+}
+
+.callgraph-breadcrumb:hover {
+    -fx-background-color: -color-bg-inset;
+    -fx-text-fill: -color-fg-default;
+}
+
+.callgraph-breadcrumb-current {
+    -fx-text-fill: -color-accent-fg;
+    -fx-font-weight: bold;
+}
+
+.callgraph-breadcrumb-sep {
+    -fx-text-fill: -color-fg-subtle;
+    -fx-font-size: 11px;
+}
+
+.callgraph-hint {
+    -fx-font-size: 10.5px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.root.light-theme .graph-block-meta {
+    -fx-fill: #6e7781;
+}
+
+/* ============ String Decryption Panel ============ */
+
+.decrypt-panel {
+    -fx-background-color: -color-bg-default;
+}
+
+.decrypt-top {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.decrypt-toolbar {
+    -fx-background-color: transparent;
+}
+
+.decrypt-header {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 0 0 6 0;
+}
+
+.decrypt-run-btn {
+    -fx-text-fill: -color-success-fg;
+    -fx-font-weight: bold;
+}
+
+.decrypt-reflect-btn {
+    -fx-text-fill: -color-danger-fg;
+}
+
+.decrypt-table {
+    -fx-background-color: transparent;
+}
+
+.decrypt-table .table-cell {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11.5px;
+}
+
+/* ============ Detection Report Dialog ============ */
+
+.detection-root {
+    -fx-background-color: -color-bg-default;
+}
+
+.detection-header {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 0 1 0;
+}
+
+.detection-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+}
+
+.detection-subtitle {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+.detection-scroll {
+    -fx-background-color: -color-bg-default;
+    -fx-background: -color-bg-default;
+}
+
+.detection-scroll > .viewport {
+    -fx-background-color: -color-bg-default;
+}
+
+.detection-section-title {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 12 0 4 0;
+}
+
+.detection-sig-box {
+    -fx-background-color: -color-bg-subtle;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-border-color: -color-border-default;
+}
+
+.detection-sig-box-high {
+    -fx-border-color: #f85149;
+    -fx-effect: dropshadow(gaussian, rgba(248, 81, 73, 0.25), 8, 0.25, 0, 0);
+}
+
+.detection-sig-box-medium {
+    -fx-border-color: #e3b341;
+}
+
+.detection-sig-name {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+}
+
+.detection-sig-conf {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 8 2 8;
+    -fx-background-radius: 4;
+}
+
+.detection-sig-conf-high {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #da3633;
+}
+
+.detection-sig-conf-medium {
+    -fx-text-fill: #1f2328;
+    -fx-background-color: #f2cc60;
+}
+
+.detection-sig-conf-low {
+    -fx-text-fill: -color-fg-default;
+    -fx-background-color: -color-neutral-subtle;
+}
+
+.detection-sig-family {
+    -fx-font-size: 10px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 2 6 2 6;
+    -fx-background-color: -color-neutral-subtle;
+    -fx-background-radius: 3;
+}
+
+.detection-evidence-bullet {
+    -fx-icon-color: -color-accent-emphasis;
+}
+
+.detection-evidence {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-fg-default;
+}
+
+.detection-none {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 20 0 20 0;
+}
+
+.detection-notdetected {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-subtle;
+    -fx-padding: 4 0 8 0;
+}
+
+.detection-footer {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1 0 0 0;
+}
+
+.graph-edge {
+    -fx-stroke: #30363d;
+    -fx-stroke-width: 1.2;
+    -fx-opacity: 0.75;
+}
+
+.graph-edge-active {
+    -fx-stroke: #f2cc60;
+    -fx-opacity: 1.0;
+    -fx-stroke-width: 2.5;
+}
+
+.graph-arrow {
+    -fx-fill: #30363d;
+    -fx-opacity: 0.75;
+}
+
+.graph-arrow.graph-edge-active {
+    -fx-fill: #f2cc60;
+    -fx-opacity: 1.0;
+}
+
+.root.light-theme .graph-block-class {
+    -fx-fill: #ffffff;
+    -fx-stroke: #1a7f37;
+}
+.root.light-theme .graph-block-method {
+    -fx-fill: #ffffff;
+    -fx-stroke: #0969da;
+}
+.root.light-theme .graph-block-external {
+    -fx-fill: #f6f8fa;
+    -fx-stroke: #6e7781;
+}
+.root.light-theme .graph-block-title {
+    -fx-fill: #1f2328;
+}
+.root.light-theme .graph-block-sub {
+    -fx-fill: #6e7781;
+}
+.root.light-theme .callgraph-minimap {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+}
+.root.light-theme .graph-edge {
+    -fx-stroke: #afb8c1;
+}
+.root.light-theme .graph-arrow {
+    -fx-fill: #afb8c1;
+}
+.root.light-theme .graph-edge-active {
+    -fx-stroke: #9a6700;
+}
+.root.light-theme .graph-arrow.graph-edge-active {
+    -fx-fill: #9a6700;
+}
+
+.detected-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 0 10 0 6;
+}
+
+.detected-label-strong {
+    -fx-text-fill: -color-danger-emphasis;
+    -fx-font-weight: bold;
+}
+
+/* ============ Editor area ============ */
+
+.main-split > .split-pane-divider {
+    -fx-padding: 0 1 0 1;
+    -fx-background-color: -color-border-default;
+}
+
+.editor-tabs .tab-header-background,
+.bottom-tabs .tab-header-background,
+.editor-views .tab-header-background {
+    -fx-background-color: -color-bg-subtle;
+}
+
+.editor-tabs .tab,
+.bottom-tabs .tab,
+.editor-views .tab {
+    -fx-padding: 4 14 4 14;
+    /* Kill any AtlantaFX-provided border on the tab itself — we draw our own underline
+       on .tab-container below, and without this reset the two stack into a doubled line. */
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+}
+
+.editor-tabs .tab .tab-label,
+.bottom-tabs .tab .tab-label,
+.editor-views .tab .tab-label {
+    -fx-text-fill: -color-fg-muted;
+}
+
+/* Preview tab (single-click from tree) — italic title to indicate reusable slot. */
+.editor-tabs .preview-tab .tab-label {
+    -fx-font-style: italic;
+}
+
+.editor-tabs .tab:selected,
+.bottom-tabs .tab:selected,
+.editor-views .tab:selected {
+    /* Same reset, duplicated for the :selected state — AtlantaFX restores a border here. */
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.editor-tabs .tab:selected .tab-label,
+.bottom-tabs .tab:selected .tab-label,
+.editor-views .tab:selected .tab-label {
+    -fx-text-fill: -color-fg-default;
+    -fx-font-weight: bold;
+}
+
+/* Accent underline on the active tab — single 2px line on the inner .tab-container.
+   Keeping it on .tab-container (rather than .tab) lets us zero-out the outer .tab border
+   above without killing the indicator. */
+.editor-tabs .tab:selected .tab-container,
+.bottom-tabs .tab:selected .tab-container,
+.editor-views .tab:selected .tab-container {
+    -fx-border-color: transparent transparent -color-accent-emphasis transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-insets: 0;
+}
+
+/* Soft hover on inactive tabs so the header isn't a dead zone. */
+.editor-tabs .tab:hover:!selected,
+.bottom-tabs .tab:hover:!selected,
+.editor-views .tab:hover:!selected {
+    -fx-background-color: -color-bg-inset;
+}
+
+.editor-tabs .tab .ikonli-font-icon,
+.bottom-tabs .tab .ikonli-font-icon,
+.editor-views .tab .ikonli-font-icon {
+    -fx-icon-color: -color-fg-muted;
+}
+
+.editor-tabs .tab:selected .ikonli-font-icon,
+.bottom-tabs .tab:selected .ikonli-font-icon,
+.editor-views .tab:selected .ikonli-font-icon {
+    -fx-icon-color: -color-accent-emphasis;
+}
+
+/* More breathing room between label and the close X */
+.editor-tabs .tab .tab-close-button {
+    -fx-padding: 0 0 0 8;
+}
+
+.editor-tabs .tab:selected .tab-close-button {
+    -fx-background-color: -color-fg-muted;
+}
+
+.editor-tabs .tab .tab-close-button:hover {
+    -fx-background-color: -color-danger-emphasis;
+}
+
+/* ============ CodeView (RichTextFX) — base ============ */
+
+.code-view,
+.code-view .styled-text-area,
+.code-view .text,
+.code-view .paragraph-text,
+.code-view .paragraph-box {
+    -fx-font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    -fx-font-smoothing-type: lcd;
+    /* NOTE: no -fx-font-size here on purpose. Font size is driven by inline style on
+     * the CodeArea (set via CodeView#applyFontStyle), and a hardcoded rule here would
+     * override the inline declaration because CSS class selectors beat element-inline
+     * styles when both lexical specificity is the same. The default size falls back to
+     * whatever the parent scene uses (typically 13px via PrimerLight/Dark). */
+}
+
+/* RichTextFX changed selector names between versions; set both. */
+.root.dark-theme .code-view .main-selection-highlight {
+    -fx-fill: rgba(56, 139, 253, 0.45);
+}
+.root.light-theme .code-view .main-selection-highlight {
+    -fx-fill: rgba(9, 105, 218, 0.30);
+}
+.code-view .styled-text-area {
+    -fx-highlight-fill: rgba(56, 139, 253, 0.45);
+    -fx-highlight-text-fill: -color-fg-default;
+}
+.root.light-theme .code-view .styled-text-area {
+    -fx-highlight-fill: rgba(9, 105, 218, 0.30);
+}
+
+/* I-beam cursor over code — RichTextFX doesn't set it on all children by default. */
+.code-view .styled-text-area,
+.code-view .text {
+    -fx-cursor: text;
+}
+
+/* Call graph tree — small colored count badges next to each method. */
+.call-graph-badge {
+    -fx-background-color: rgba(139, 148, 158, 0.15);
+    -fx-background-radius: 4;
+    -fx-padding: 0 6 0 6;
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+/* Visual pulse on a line when user jumps to it via call graph / go-to-definition. */
+.root.dark-theme .code-view .line-jump-flash {
+    -fx-fill: #f2cc60;
+    -fx-background-color: rgba(242, 204, 96, 0.25);
+}
+.root.light-theme .code-view .line-jump-flash {
+    -fx-fill: #9a6700;
+    -fx-background-color: rgba(154, 103, 0, 0.20);
+}
+
+/*
+ * Caret-line: subtle darker tint on the paragraph containing the caret — follows the
+ * caret on every move (click, arrow keys, programmatic). Gives the same "current line"
+ * affordance every IDE has (VS/IntelliJ/JADX) so the eye doesn't lose position. Should
+ * be subtler than .focused-line (which is a navigation pin) so clicking around while
+ * a jump-target is still marked doesn't drown out the amber match-highlight.
+ */
+.root.dark-theme .code-view .paragraph-box.caret-line {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+}
+.root.light-theme .code-view .paragraph-box.caret-line {
+    -fx-background-color: rgba(0, 0, 0, 0.03);
+}
+
+/*
+ * Persistent focused-line tint — applied as a PARAGRAPH style (not text overlay), so
+ * it paints the full paragraph-box background including leading whitespace and trailing
+ * empty column, matching IntelliJ/JADX "current line" behaviour. The class lives on
+ * .paragraph-box because that's the element RichTextFX tags via setParagraphStyle.
+ */
+.root.dark-theme .code-view .paragraph-box.focused-line {
+    -fx-background-color: rgba(88, 166, 255, 0.12);
+}
+.root.light-theme .code-view .paragraph-box.focused-line {
+    -fx-background-color: rgba(9, 105, 218, 0.08);
+}
+
+/*
+ * Brighter one-shot pulse stacked on top of .focused-line (both classes co-applied by
+ * the view for 1.5 s on every jump). Auto-reverts to just .focused-line.
+ */
+.root.dark-theme .code-view .paragraph-box.focused-line-pulse {
+    -fx-background-color: rgba(88, 166, 255, 0.28);
+}
+.root.light-theme .code-view .paragraph-box.focused-line-pulse {
+    -fx-background-color: rgba(9, 105, 218, 0.20);
+}
+
+/* Hex Tools panel — checksums, entropy chart, diff launcher. */
+.hex-tools-panel {
+    -fx-font-size: 12px;
+}
+.hex-tools-label {
+    -fx-text-fill: -color-fg-muted;
+}
+.hex-tools-value {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+}
+.hex-tools-section-title {
+    -fx-font-size: 12.5px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 0 2 0;
+}
+.hex-tools-hash-label {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+}
+.hex-tools-hash-value {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 10.5px;
+}
+.hex-tools-copy-btn {
+    -fx-font-size: 10.5px;
+    -fx-padding: 1 6 1 6;
+}
+
+/* Hex diff stage — side-by-side, change-highlight colors. */
+.hex-diff-root {
+    -fx-background-color: -color-bg-default;
+}
+.hex-diff-header {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: -color-border-default;
+}
+.root.light-theme .hex-diff-header { -fx-background-color: #f6f8fa; }
+.root.dark-theme .hex-diff-header  { -fx-background-color: #161b22; }
+.hex-diff-filename {
+    -fx-font-weight: bold;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+}
+.hex-diff-summary {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11.5px;
+}
+/* Changed byte = amber; only-in-left = red; only-in-right = green. Background-color
+ * layers on top of hex-byte text color so both stay visible. */
+.root.light-theme .hex-diff-changed    { -rtfx-background-color: rgba(250, 225, 125, 0.70); }
+.root.dark-theme .hex-diff-changed     { -rtfx-background-color: rgba(210, 168, 255, 0.40); }
+.root.light-theme .hex-diff-only-left  { -rtfx-background-color: rgba(255, 129, 130, 0.55); }
+.root.dark-theme .hex-diff-only-left   { -rtfx-background-color: rgba(248, 81, 73, 0.40); }
+.root.light-theme .hex-diff-only-right { -rtfx-background-color: rgba(133, 226, 142, 0.55); }
+.root.dark-theme .hex-diff-only-right  { -rtfx-background-color: rgba(63, 185, 80, 0.40); }
+
+/* Hex Structure panel — second tab in the hex sidebar. Tree of parsed format fields. */
+.hex-structure-panel {
+    -fx-padding: 0;
+}
+.hex-structure-tree {
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+    -fx-font-size: 11.5px;
+}
+.hex-structure-label {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+}
+.hex-structure-range {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 10.5px;
+}
+.hex-structure-empty {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11.5px;
+    -fx-font-style: italic;
+}
+
+/* Range highlight driven by structure-node click. Distinct hue from find-match so
+ * both can coexist. Green-ish "interesting region" feel, a la Wireshark. */
+.root.light-theme .hex-view .hex-struct {
+    -rtfx-background-color: rgba(46, 160, 67, 0.22);
+}
+.root.dark-theme .hex-view .hex-struct {
+    -rtfx-background-color: rgba(63, 185, 80, 0.28);
+}
+
+/* Hex Data Inspector sidebar — appears on the right of the hex area. */
+.hex-inspector-panel {
+    -fx-padding: 6 8 6 8;
+}
+.root.light-theme .hex-inspector-panel { -fx-background-color: #f6f8fa; }
+.root.dark-theme .hex-inspector-panel  { -fx-background-color: #0d1117; }
+.hex-inspector-header {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 2 0;
+}
+.hex-inspector-offset {
+    -fx-font-size: 11px;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 0 0 4 0;
+}
+.hex-inspector-table {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 11.5px;
+}
+
+/* Hex viewer — toolbar, find bar, match highlights, status bar. */
+.hex-view-root {
+    -fx-background-color: -color-bg-default;
+}
+.hex-toolbar {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: -color-border-default;
+}
+.root.light-theme .hex-toolbar { -fx-background-color: #f6f8fa; }
+.root.dark-theme .hex-toolbar  { -fx-background-color: #161b22; }
+.hex-toolbar-label {
+    -fx-font-size: 11.5px;
+    -fx-text-fill: -color-fg-muted;
+}
+.hex-find-bar {
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: -color-border-default;
+}
+.root.light-theme .hex-find-bar { -fx-background-color: #f6f8fa; }
+.root.dark-theme .hex-find-bar  { -fx-background-color: #161b22; }
+.hex-find-status {
+    -fx-font-size: 11.5px;
+    -fx-text-fill: -color-fg-muted;
+}
+.hex-status-bar {
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: -color-border-default;
+}
+.root.light-theme .hex-status-bar { -fx-background-color: #f6f8fa; }
+.root.dark-theme .hex-status-bar  { -fx-background-color: #161b22; }
+.hex-status-label {
+    -fx-font-size: 11.5px;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+}
+/* Find-result highlight backgrounds on the hex / ASCII bytes. */
+.root.light-theme .hex-view .hex-match {
+    -rtfx-background-color: rgba(250, 225, 125, 0.55);
+}
+.root.dark-theme .hex-view .hex-match {
+    -rtfx-background-color: rgba(210, 168, 255, 0.28);
+}
+.root.light-theme .hex-view .hex-match-current {
+    -rtfx-background-color: rgba(250, 225, 125, 0.90);
+    -fx-font-weight: bold;
+}
+.root.dark-theme .hex-view .hex-match-current {
+    -rtfx-background-color: rgba(210, 168, 255, 0.55);
+    -fx-font-weight: bold;
+}
+
+/* Compare view — dynamic columns with per-column selector and add/close buttons. */
+.compare-column-selector {
+    -fx-font-size: 12px;
+}
+.compare-column-close {
+    -fx-padding: 0 8 0 8;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+}
+.compare-column-close:hover {
+    -fx-background-color: rgba(207, 34, 46, 0.15);
+    -fx-text-fill: #cf222e;
+}
+.compare-add-btn {
+    -fx-font-size: 11.5px;
+    -fx-padding: 3 10 3 10;
+}
+.compare-add-bar {
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: -color-border-default;
+}
+
+/* JVM Inspector — live metrics window spawned after Attach to JVM. */
+.jvm-inspector-root {
+    -fx-background-color: -color-bg-default;
+}
+.root.light-theme .jvm-inspector-root { -fx-background-color: #ffffff; }
+.root.dark-theme .jvm-inspector-root  { -fx-background-color: #0d1117; }
+.jvm-inspector-header {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: -color-border-default;
+}
+.root.light-theme .jvm-inspector-header { -fx-background-color: #f6f8fa; }
+.root.dark-theme .jvm-inspector-header  { -fx-background-color: #161b22; }
+.jvm-inspector-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.jvm-inspector-pid {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+}
+.jvm-deadlock-banner {
+    -fx-background-color: #cf222e;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 2 10 2 10;
+    -fx-font-weight: bold;
+}
+.jvm-inspector-status-bar {
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: -color-border-default;
+}
+.jvm-inspector-status {
+    -fx-font-size: 11.5px;
+    -fx-text-fill: -color-fg-muted;
+}
+.jvm-stack-header {
+    -fx-font-size: 11.5px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 8 2 8;
+    -fx-text-fill: -color-fg-muted;
+}
+
+/* Xref / Find Usages panel — new tree layout, filter bar + grouped results. */
+.usage-tree {
+    -fx-background-color: transparent;
+}
+.usage-count-badge {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11.5px;
+}
+.usage-filter-row {
+    -fx-spacing: 6;
+}
+.usage-filter-field {
+    -fx-pref-width: 240;
+    -fx-font-size: 12px;
+}
+.usage-filter-toggle {
+    -fx-min-width: 28;
+    -fx-font-size: 11px;
+    -fx-padding: 2 8 2 8;
+}
+.usage-class-name {
+    -fx-font-weight: bold;
+    -fx-font-size: 12.5px;
+}
+.root.light-theme .usage-class-icon { -fx-icon-color: #1a7f37; }
+.root.dark-theme .usage-class-icon  { -fx-icon-color: #7ee787; }
+.root.light-theme .usage-method-icon { -fx-icon-color: #8250df; }
+.root.dark-theme .usage-method-icon  { -fx-icon-color: #d2a8ff; }
+.usage-method-name {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+}
+.usage-group-badge {
+    -fx-background-color: rgba(139, 148, 158, 0.15);
+    -fx-background-radius: 4;
+    -fx-padding: 0 6 0 6;
+    -fx-font-size: 10.5px;
+    -fx-text-fill: -color-fg-muted;
+}
+
+/* Preferences — JADX-style sidebar + per-section content. */
+.preferences-root {
+    -fx-background-color: -color-bg-default;
+}
+/* Explicit background for each theme — the AtlantaFX CSS variables sometimes fail to
+ * propagate to secondary Stages (only the primary gets the full variable cascade from
+ * setUserAgentStylesheet), so we set concrete colors for our own windows. */
+.root.light-theme.preferences-root,
+.root.light-theme .preferences-root,
+.root.light-theme .preferences-content {
+    -fx-background-color: #ffffff;
+}
+.root.dark-theme.preferences-root,
+.root.dark-theme .preferences-root,
+.root.dark-theme .preferences-content {
+    -fx-background-color: #0d1117;
+}
+.preferences-sidebar {
+    -fx-background-insets: 0;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: -color-border-default;
+    -fx-padding: 6 0 6 0;
+}
+.root.light-theme .preferences-sidebar {
+    -fx-background-color: #f6f8fa;
+}
+.root.dark-theme .preferences-sidebar {
+    -fx-background-color: #161b22;
+}
+.preferences-sidebar .list-cell {
+    -fx-padding: 7 14 7 14;
+    -fx-graphic-text-gap: 10;
+    -fx-font-size: 13px;
+    -fx-background-color: transparent;
+}
+.root.light-theme .preferences-sidebar .list-cell:hover:filled {
+    -fx-background-color: rgba(0, 0, 0, 0.06);
+}
+.root.dark-theme .preferences-sidebar .list-cell:hover:filled {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+}
+/* Selected state: tinted background + accent-coloured text so the active section is
+ * obvious on both themes. Without this, the default ListView selection paints dark
+ * blue with black text — invisible on either theme. */
+.root.light-theme .preferences-sidebar .list-cell:selected,
+.root.light-theme .preferences-sidebar .list-cell:selected:focused {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #0550ae;
+}
+.root.dark-theme .preferences-sidebar .list-cell:selected,
+.root.dark-theme .preferences-sidebar .list-cell:selected:focused {
+    -fx-background-color: #1f6feb26;
+    -fx-text-fill: #58a6ff;
+}
+.root.light-theme .preferences-sidebar .list-cell:selected .ikonli-font-icon,
+.root.light-theme .preferences-sidebar .list-cell:selected:focused .ikonli-font-icon {
+    -fx-icon-color: #0550ae;
+}
+.root.dark-theme .preferences-sidebar .list-cell:selected .ikonli-font-icon,
+.root.dark-theme .preferences-sidebar .list-cell:selected:focused .ikonli-font-icon {
+    -fx-icon-color: #58a6ff;
+}
+.preferences-section-title {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 6 0;
+}
+.root.light-theme .preferences-section-title,
+.root.light-theme .preferences-field-label,
+.root.light-theme .preferences-sidebar .list-cell,
+.root.light-theme .preferences-about-title {
+    -fx-text-fill: #1f2328;
+}
+.root.dark-theme .preferences-section-title,
+.root.dark-theme .preferences-field-label,
+.root.dark-theme .preferences-sidebar .list-cell,
+.root.dark-theme .preferences-about-title {
+    -fx-text-fill: #e6edf3;
+}
+.preferences-content {
+    -fx-background-color: -color-bg-default;
+}
+.root.light-theme .preferences-footer {
+    -fx-background-color: #f6f8fa;
+    -fx-border-color: #d0d7de;
+}
+.root.dark-theme .preferences-footer {
+    -fx-background-color: #161b22;
+    -fx-border-color: #30363d;
+}
+.preferences-scroll {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+.preferences-scroll .viewport {
+    -fx-background-color: transparent;
+}
+.preferences-scroll > .scroll-bar {
+    -fx-background-color: transparent;
+}
+.preferences-field-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-fg-default;
+}
+.preferences-note {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11.5px;
+    -fx-padding: 4 0 0 0;
+}
+/* Settings window-specific polish — complements the shared .preferences-* rules above. */
+.settings-top-bar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: transparent transparent -color-border-default transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.settings-top-bar .ikonli-font-icon {
+    -fx-icon-color: -color-fg-muted;
+}
+.settings-search-field {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+    -fx-padding: 4 10 4 10;
+    -fx-font-size: 13px;
+}
+.settings-search-field:focused {
+    -fx-border-color: -color-accent-emphasis;
+}
+.settings-readonly-field {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-muted;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-text-fill: -color-fg-muted;
+    -fx-padding: 4 10 4 10;
+}
+.settings-restore-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-border-muted;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-text-fill: -color-fg-muted;
+}
+.settings-restore-btn:hover {
+    -fx-text-fill: -color-danger-fg;
+    -fx-border-color: -color-danger-emphasis;
+}
+
+.preferences-footer {
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: -color-border-default;
+}
+.preferences-about-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+.button-primary {
+    -fx-base: -color-accent-emphasis;
+}
+
+/* Keymap editor — user-visible clash warnings + compact Edit/Clear buttons. */
+.keymap-conflict-label {
+    -fx-text-fill: #ffa198;
+    -fx-font-size: 11.5px;
+}
+.button-small {
+    -fx-padding: 2 6 2 6;
+    -fx-font-size: 11px;
+}
+
+/* Start page — shown when no jar is loaded. Recent + pinned + fuzzy search. */
+.start-page {
+    -fx-background-color: -color-bg-default;
+}
+.start-page-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+}
+.start-page-subtitle {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 12.5px;
+}
+.start-page-logo {
+    -fx-text-fill: -color-accent-fg;
+}
+.start-page-search {
+    -fx-font-size: 13px;
+}
+.start-page-section-header {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-fg-default;
+    -fx-padding: 12 0 4 0;
+    -fx-graphic-text-gap: 6;
+}
+.start-page-list {
+    -fx-background-insets: 0;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+.start-page-entry-name {
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+}
+.start-page-entry-dir {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11px;
+}
+.start-page-entry-size {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11px;
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+}
+.start-page-browse {
+    -fx-graphic-text-gap: 6;
+}
+
+/* Native library info tab — parsed ELF/PE/Mach-O summary + symbol list. */
+.root.dark-theme .native-info-header {
+    -fx-background-color: rgba(139, 148, 158, 0.08);
+    -fx-border-color: transparent transparent rgba(139, 148, 158, 0.25) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.root.light-theme .native-info-header {
+    -fx-background-color: rgba(208, 215, 222, 0.3);
+    -fx-border-color: transparent transparent #d0d7de transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.native-info-key {
+    -fx-min-width: 120;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 12px;
+}
+.native-info-value {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12.5px;
+}
+.native-info-diagnostic {
+    -fx-text-fill: #d2a8ff;
+    -fx-font-size: 11.5px;
+    -fx-padding: 4 0 0 0;
+}
+.native-info-section-hint {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11px;
+    -fx-font-style: italic;
+}
+.native-symbol-list {
+    -fx-font-family: "JetBrains Mono", "Consolas", monospace;
+    -fx-font-size: 12px;
+}
+.native-symbol-jni {
+    -fx-font-weight: bold;
+}
+.root.dark-theme .native-symbol-jni-decoded {
+    -fx-text-fill: #7ee787;
+    -fx-font-size: 11px;
+}
+.root.light-theme .native-symbol-jni-decoded {
+    -fx-text-fill: #1a7f37;
+    -fx-font-size: 11px;
+}
+
+/* Compile error markers on failing lines. */
+.root.dark-theme .code-view .error-line {
+    -fx-fill: #ffa198;
+    -fx-underline: true;
+}
+.root.light-theme .code-view .error-line {
+    -fx-fill: #cf222e;
+    -fx-underline: true;
+}
+
+.code-view .lineno {
+    -fx-font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    -fx-font-size: 11.5px;
+    -fx-padding: 0 14 0 12;
+    -fx-border-width: 0 1 0 0;
+}
+
+.hex-view,
+.hex-view .styled-text-area,
+.hex-view .text,
+.hex-view .paragraph-text,
+.hex-view .paragraph-box {
+    -fx-font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    -fx-font-size: 12.5px;
+    -fx-font-smoothing-type: lcd;
+}
+
+.hex-view .lineno {
+    -fx-font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    -fx-font-size: 11.5px;
+    -fx-padding: 0 14 0 12;
+    -fx-border-width: 0 1 0 0;
+}
+
+/* ============ DARK theme ============ */
+
+.root.dark-theme .code-view,
+.root.dark-theme .hex-view {
+    -fx-background-color: #0d1117;
+}
+
+.root.dark-theme .code-view .text,
+.root.dark-theme .hex-view .text {
+    -fx-fill: #c9d1d9;
+}
+
+.root.dark-theme .code-view .lineno,
+.root.dark-theme .hex-view .lineno {
+    -fx-background-color: #161b22;
+    -fx-text-fill: #6e7681;
+    -fx-border-color: #30363d;
+}
+
+.root.dark-theme .code-view .caret,
+.root.dark-theme .hex-view .caret {
+    -fx-stroke: #c9d1d9;
+}
+
+.root.dark-theme .code-view .selection,
+.root.dark-theme .hex-view .selection {
+    -fx-fill: rgba(56, 139, 253, 0.4);
+}
+
+.root.dark-theme .code-view .code-keyword { -fx-fill: #ff7b72; -fx-font-weight: bold; }
+.root.dark-theme .code-view .code-opcode  { -fx-fill: #d2a8ff; -fx-font-weight: bold; }
+.root.dark-theme .code-view .code-string  { -fx-fill: #a5d6ff; }
+.root.dark-theme .code-view .code-number  { -fx-fill: #79c0ff; }
+.root.dark-theme .code-view .code-comment { -fx-fill: #8b949e; -fx-font-style: italic; }
+.root.dark-theme .code-view .code-label   { -fx-fill: #f2cc60; -fx-font-weight: bold; }
+.root.dark-theme .code-view .code-type    { -fx-fill: #ffa657; }
+.root.dark-theme .code-view .code-annotation { -fx-fill: #e3b341; }
+
+.root.dark-theme .hex-view .hex-zero          { -fx-fill: #484f58; }
+.root.dark-theme .hex-view .hex-printable     { -fx-fill: #a5d6ff; }
+.root.dark-theme .hex-view .hex-ff            { -fx-fill: #f85149; }
+.root.dark-theme .hex-view .hex-other         { -fx-fill: #d2a8ff; }
+.root.dark-theme .hex-view .hex-ascii-zero    { -fx-fill: #484f58; }
+.root.dark-theme .hex-view .hex-ascii-printable { -fx-fill: #c9d1d9; }
+.root.dark-theme .hex-view .hex-ascii-other   { -fx-fill: #484f58; }
+.root.dark-theme .hex-view .hex-sep           { -fx-fill: #6e7681; }
+
+/* ============ LIGHT theme ============ */
+
+.root.light-theme .code-view,
+.root.light-theme .hex-view {
+    -fx-background-color: #ffffff;
+}
+
+.root.light-theme .code-view .text,
+.root.light-theme .hex-view .text {
+    -fx-fill: #1f2328;
+}
+
+.root.light-theme .code-view .lineno,
+.root.light-theme .hex-view .lineno {
+    -fx-background-color: #f6f8fa;
+    -fx-text-fill: #8c959f;
+    -fx-border-color: #d0d7de;
+}
+
+.root.light-theme .code-view .caret,
+.root.light-theme .hex-view .caret {
+    -fx-stroke: #1f2328;
+}
+
+.root.light-theme .code-view .selection,
+.root.light-theme .hex-view .selection {
+    -fx-fill: rgba(84, 174, 255, 0.35);
+}
+
+.root.light-theme .code-view .code-keyword { -fx-fill: #cf222e; -fx-font-weight: bold; }
+.root.light-theme .code-view .code-opcode  { -fx-fill: #8250df; -fx-font-weight: bold; }
+.root.light-theme .code-view .code-string  { -fx-fill: #0a3069; }
+.root.light-theme .code-view .code-number  { -fx-fill: #0550ae; }
+.root.light-theme .code-view .code-comment { -fx-fill: #6e7781; -fx-font-style: italic; }
+.root.light-theme .code-view .code-label   { -fx-fill: #9a6700; -fx-font-weight: bold; }
+.root.light-theme .code-view .code-type    { -fx-fill: #953800; }
+.root.light-theme .code-view .code-annotation { -fx-fill: #9a6700; }
+
+.root.light-theme .hex-view .hex-zero          { -fx-fill: #afb8c1; }
+.root.light-theme .hex-view .hex-printable     { -fx-fill: #0a3069; }
+.root.light-theme .hex-view .hex-ff            { -fx-fill: #cf222e; }
+.root.light-theme .hex-view .hex-other         { -fx-fill: #8250df; }
+.root.light-theme .hex-view .hex-ascii-zero    { -fx-fill: #afb8c1; }
+.root.light-theme .hex-view .hex-ascii-printable { -fx-fill: #1f2328; }
+.root.light-theme .hex-view .hex-ascii-other   { -fx-fill: #afb8c1; }
+.root.light-theme .hex-view .hex-sep           { -fx-fill: #8c959f; }
+
+/* ============ Syntax themes (must stay last in cascade) ============
+ * These rules override the base .dark-theme / .light-theme tokens of the same
+ * selectors above. Declared last so cascade rule "later wins" gives us priority
+ * without needing !important.
+ */
+
+/* Dracula — the classic. Purple keywords, green strings. */
+.root.syntax-dracula .code-view .code-keyword   { -fx-fill: #ff79c6; -fx-font-weight: bold; }
+.root.syntax-dracula .code-view .code-opcode    { -fx-fill: #bd93f9; -fx-font-weight: bold; }
+.root.syntax-dracula .code-view .code-string    { -fx-fill: #f1fa8c; -fx-font-weight: normal; }
+.root.syntax-dracula .code-view .code-number    { -fx-fill: #bd93f9; -fx-font-weight: normal; }
+.root.syntax-dracula .code-view .code-comment   { -fx-fill: #6272a4; -fx-font-style: italic; }
+.root.syntax-dracula .code-view .code-label     { -fx-fill: #50fa7b; -fx-font-weight: bold; }
+.root.syntax-dracula .code-view .code-type      { -fx-fill: #8be9fd; -fx-font-weight: normal; }
+.root.syntax-dracula .code-view .code-annotation { -fx-fill: #50fa7b; -fx-font-weight: normal; }
+
+/* Monokai — Sublime classic. Pink keywords, yellow strings. */
+.root.syntax-monokai .code-view .code-keyword   { -fx-fill: #f92672; -fx-font-weight: bold; }
+.root.syntax-monokai .code-view .code-opcode    { -fx-fill: #ae81ff; -fx-font-weight: bold; }
+.root.syntax-monokai .code-view .code-string    { -fx-fill: #e6db74; -fx-font-weight: normal; }
+.root.syntax-monokai .code-view .code-number    { -fx-fill: #ae81ff; -fx-font-weight: normal; }
+.root.syntax-monokai .code-view .code-comment   { -fx-fill: #75715e; -fx-font-style: italic; }
+.root.syntax-monokai .code-view .code-label     { -fx-fill: #a6e22e; -fx-font-weight: bold; }
+.root.syntax-monokai .code-view .code-type      { -fx-fill: #66d9ef; -fx-font-weight: normal; }
+.root.syntax-monokai .code-view .code-annotation { -fx-fill: #a6e22e; -fx-font-weight: normal; }
+
+/* Solarized Dark — ethan schoonover. Muted, warm. */
+.root.syntax-solarized-dark .code-view .code-keyword   { -fx-fill: #b58900; -fx-font-weight: bold; }
+.root.syntax-solarized-dark .code-view .code-opcode    { -fx-fill: #6c71c4; -fx-font-weight: bold; }
+.root.syntax-solarized-dark .code-view .code-string    { -fx-fill: #2aa198; -fx-font-weight: normal; }
+.root.syntax-solarized-dark .code-view .code-number    { -fx-fill: #d33682; -fx-font-weight: normal; }
+.root.syntax-solarized-dark .code-view .code-comment   { -fx-fill: #586e75; -fx-font-style: italic; }
+.root.syntax-solarized-dark .code-view .code-label     { -fx-fill: #859900; -fx-font-weight: bold; }
+.root.syntax-solarized-dark .code-view .code-type      { -fx-fill: #cb4b16; -fx-font-weight: normal; }
+.root.syntax-solarized-dark .code-view .code-annotation { -fx-fill: #859900; -fx-font-weight: normal; }
+
+/* Solarized Light — same palette, background-shifted. */
+.root.syntax-solarized-light .code-view .code-keyword   { -fx-fill: #b58900; -fx-font-weight: bold; }
+.root.syntax-solarized-light .code-view .code-opcode    { -fx-fill: #6c71c4; -fx-font-weight: bold; }
+.root.syntax-solarized-light .code-view .code-string    { -fx-fill: #2aa198; -fx-font-weight: normal; }
+.root.syntax-solarized-light .code-view .code-number    { -fx-fill: #d33682; -fx-font-weight: normal; }
+.root.syntax-solarized-light .code-view .code-comment   { -fx-fill: #93a1a1; -fx-font-style: italic; }
+.root.syntax-solarized-light .code-view .code-label     { -fx-fill: #859900; -fx-font-weight: bold; }
+.root.syntax-solarized-light .code-view .code-type      { -fx-fill: #cb4b16; -fx-font-weight: normal; }
+.root.syntax-solarized-light .code-view .code-annotation { -fx-fill: #859900; -fx-font-weight: normal; }

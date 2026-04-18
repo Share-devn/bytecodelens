@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="dev.share.bytecodelens.ui.MainController"
+            prefWidth="1400" prefHeight="860">
+
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem text="Open..." onAction="#onOpen" accelerator="Shortcut+O"/>
+                    <MenuItem text="Open from URL..." onAction="#onOpenFromUrl"/>
+                    <Menu fx:id="recentFilesMenu" text="Open Recent"/>
+                    <MenuItem text="Compare with..." onAction="#onCompareWith" accelerator="Shortcut+D"/>
+                    <MenuItem text="Attach to JVM..." onAction="#onAttachToJvm"/>
+                    <MenuItem text="Close Jar" onAction="#onCloseJar"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Save As..." onAction="#onSaveAs"/>
+                    <MenuItem text="Export Sources..." onAction="#onExportSources"/>
+                    <MenuItem text="Export Bytecode..." onAction="#onExportBytecode"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Save Workspace..." onAction="#onSaveWorkspace"/>
+                    <MenuItem text="Open Workspace..." onAction="#onOpenWorkspace"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Exit" onAction="#onExit" accelerator="Shortcut+Q"/>
+                </Menu>
+                <Menu text="View">
+                    <MenuItem text="Toggle Theme" onAction="#onToggleTheme" accelerator="Shortcut+T"/>
+                </Menu>
+                <Menu text="Settings">
+                    <MenuItem text="Open Settings..." onAction="#onOpenSettings" accelerator="Shortcut+Comma"/>
+                </Menu>
+                <Menu text="Edit">
+                    <MenuItem text="Find in Jar..." onAction="#onFindInJar" accelerator="Shortcut+Shift+F"/>
+                    <MenuItem text="Clear Highlights" onAction="#onClearHighlights" accelerator="Shortcut+K"/>
+                </Menu>
+                <Menu text="Analyze">
+                    <MenuItem text="Decrypt Strings..." onAction="#onDecryptStrings"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Apply Mapping..." onAction="#onApplyMapping"/>
+                    <MenuItem text="Export Mapping..." onAction="#onExportMapping"/>
+                    <MenuItem text="Revert Mapping" onAction="#onRevertMapping"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Transformations..." onAction="#onRunTransformations"/>
+                    <MenuItem text="Mass Rename..." onAction="#onMassRename"/>
+                    <MenuItem text="Find Member References..." onAction="#onFindMemberRefs"/>
+                </Menu>
+                <Menu text="Help">
+                    <MenuItem text="About BytecodeLens" onAction="#onAbout"/>
+                </Menu>
+            </MenuBar>
+
+            <ToolBar styleClass="app-toolbar">
+                <!-- Group 1: File ops -->
+                <Button fx:id="openButton" onAction="#onOpen" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2f-folder-open-outline" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Open jar / class / war / zip  (Ctrl+O)"/></tooltip>
+                </Button>
+                <Button onAction="#onOpenFromUrl" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2e-earth" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Open from URL..."/></tooltip>
+                </Button>
+                <Button onAction="#onCloseJar" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2c-close-circle-outline" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Close current jar"/></tooltip>
+                </Button>
+
+                <Separator orientation="VERTICAL" styleClass="toolbar-separator"/>
+
+                <!-- Group 2: Navigation -->
+                <Button fx:id="navBackButton" onAction="#onNavBack" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2a-arrow-left" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Back  (Alt+Left)"/></tooltip>
+                </Button>
+                <Button fx:id="navForwardButton" onAction="#onNavForward" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2a-arrow-right" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Forward  (Alt+Right)"/></tooltip>
+                </Button>
+                <Button fx:id="backButton" onAction="#onGoBackToParentJar" styleClass="button-icon,toolbar-btn" focusTraversable="false" disable="true">
+                    <graphic><FontIcon iconLiteral="mdi2a-arrow-up-bold" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Back to parent archive"/></tooltip>
+                </Button>
+
+                <Separator orientation="VERTICAL" styleClass="toolbar-separator"/>
+
+                <!-- Group 3: Search / navigation dialogs -->
+                <FontIcon iconLiteral="mdi2m-magnify" iconSize="16" styleClass="toolbar-search-icon"/>
+                <TextField fx:id="searchField" promptText="Filter classes..." prefWidth="300" styleClass="search-field"/>
+                <Button onAction="#onFindInJar" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2f-file-search-outline" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Find in Jar  (Ctrl+Shift+F)"/></tooltip>
+                </Button>
+                <Button onAction="#onGotoClass" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2c-compass-outline" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Go to Class  (Ctrl+N)"/></tooltip>
+                </Button>
+
+                <Separator orientation="VERTICAL" styleClass="toolbar-separator"/>
+
+                <!-- Group 4: Analyze actions -->
+                <Button onAction="#onApplyMapping" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2m-map-outline" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Apply Mapping..."/></tooltip>
+                </Button>
+                <Button onAction="#onRunTransformations" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2w-wrench-outline" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Run Transformations..."/></tooltip>
+                </Button>
+                <Button onAction="#onAttachToJvm" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2c-connection" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Attach to running JVM..."/></tooltip>
+                </Button>
+
+                <Separator orientation="VERTICAL" styleClass="toolbar-separator"/>
+
+                <!-- Group 5: Export -->
+                <Button onAction="#onSaveAs" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2c-content-save-outline" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Save As..."/></tooltip>
+                </Button>
+                <Button onAction="#onExportSources" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2e-export" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Export Sources..."/></tooltip>
+                </Button>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Group 6: Settings / theme -->
+                <Button onAction="#onOpenSettings" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon iconLiteral="mdi2c-cog-outline" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Settings  (Ctrl+,)"/></tooltip>
+                </Button>
+                <ToggleButton fx:id="themeToggle" onAction="#onToggleTheme" styleClass="button-icon,toolbar-btn" focusTraversable="false">
+                    <graphic><FontIcon fx:id="themeIcon" iconLiteral="mdi2w-weather-night" iconSize="18"/></graphic>
+                    <tooltip><javafx.scene.control.Tooltip text="Toggle theme  (Ctrl+T)"/></tooltip>
+                </ToggleButton>
+            </ToolBar>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane fx:id="mainSplit" dividerPositions="0.20, 0.74" styleClass="main-split">
+
+            <VBox styleClass="side-panel" SplitPane.resizableWithParent="false"
+                  minWidth="240" prefWidth="280">
+                <HBox alignment="CENTER_LEFT" styleClass="panel-header">
+                    <FontIcon iconLiteral="mdi2f-file-tree" iconSize="13" styleClass="panel-header-icon"/>
+                    <Label text="PROJECT" styleClass="panel-title"/>
+                </HBox>
+                <TreeView fx:id="classTree" VBox.vgrow="ALWAYS" styleClass="class-tree"/>
+            </VBox>
+
+            <!-- Vertical SplitPane so the user can drag the divider between the editor
+                 area and the bottom inspector tabs. The editor side is flexible, the
+                 bottom side is sized at ~25% of the window height by default. -->
+            <SplitPane fx:id="centerSplit" orientation="VERTICAL" styleClass="center-panel"
+                       minWidth="500" dividerPositions="0.72">
+                <TabPane fx:id="editorTabs" tabClosingPolicy="ALL_TABS" styleClass="editor-tabs"/>
+                <TabPane fx:id="bottomTabs" prefHeight="220" styleClass="bottom-tabs"
+                         SplitPane.resizableWithParent="true">
+                    <Tab text="Constant Pool" closable="false">
+                        <TableView fx:id="constantPoolTable">
+                            <columns>
+                                <TableColumn fx:id="cpIndexCol" text="#" prefWidth="50"/>
+                                <TableColumn fx:id="cpTypeCol" text="Type" prefWidth="140"/>
+                                <TableColumn fx:id="cpValueCol" text="Value" prefWidth="600"/>
+                            </columns>
+                        </TableView>
+                    </Tab>
+                    <Tab text="Methods" closable="false">
+                        <TableView fx:id="methodsTable">
+                            <columns>
+                                <TableColumn fx:id="mNameCol" text="Name" prefWidth="200"/>
+                                <TableColumn fx:id="mDescCol" text="Descriptor" prefWidth="280"/>
+                                <TableColumn fx:id="mAccessCol" text="Flags" prefWidth="180"/>
+                                <TableColumn fx:id="mInsnCol" text="Insn" prefWidth="70"/>
+                            </columns>
+                        </TableView>
+                    </Tab>
+                    <Tab text="Fields" closable="false">
+                        <TableView fx:id="fieldsTable">
+                            <columns>
+                                <TableColumn fx:id="fNameCol" text="Name" prefWidth="200"/>
+                                <TableColumn fx:id="fDescCol" text="Descriptor" prefWidth="200"/>
+                                <TableColumn fx:id="fAccessCol" text="Flags" prefWidth="180"/>
+                                <TableColumn fx:id="fValueCol" text="Constant Value" prefWidth="200"/>
+                            </columns>
+                        </TableView>
+                    </Tab>
+                    <Tab fx:id="patternsTab" text="Patterns" closable="false"/>
+                    <Tab fx:id="usagesTab" text="Usages" closable="false"/>
+                    <Tab fx:id="hierarchyTab" text="Hierarchy" closable="false"/>
+                    <Tab fx:id="decryptTab" text="Decrypt Strings" closable="false"/>
+                </TabPane>
+            </SplitPane>
+
+            <VBox styleClass="side-panel" SplitPane.resizableWithParent="false"
+                  minWidth="260" prefWidth="320">
+                <HBox alignment="CENTER_LEFT" styleClass="panel-header">
+                    <FontIcon iconLiteral="mdi2i-information-outline" iconSize="13" styleClass="panel-header-icon"/>
+                    <Label text="CLASS INFO" styleClass="panel-title"/>
+                </HBox>
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="info-scroll">
+                    <VBox fx:id="classInfoBox" styleClass="class-info" spacing="6">
+                        <padding><Insets top="8" right="14" bottom="8" left="14"/></padding>
+                    </VBox>
+                </ScrollPane>
+                <HBox alignment="CENTER_LEFT" styleClass="panel-header">
+                    <FontIcon iconLiteral="mdi2e-eye-outline" iconSize="13" styleClass="panel-header-icon"/>
+                    <Label text="DATA INSPECTOR" styleClass="panel-title"/>
+                </HBox>
+                <VBox fx:id="dataInspectorBox" styleClass="data-inspector" spacing="4" prefHeight="160">
+                    <padding><Insets top="8" right="14" bottom="8" left="14"/></padding>
+                </VBox>
+            </VBox>
+
+        </SplitPane>
+    </center>
+
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="10">
+            <padding><Insets top="4" right="12" bottom="4" left="12"/></padding>
+            <FontIcon iconLiteral="mdi2c-circle" iconSize="9" styleClass="status-dot"/>
+            <Label fx:id="statusLeft" text="Ready" maxWidth="Infinity" HBox.hgrow="SOMETIMES"/>
+            <Region HBox.hgrow="ALWAYS" minWidth="20"/>
+            <ProgressBar fx:id="progressBar" prefWidth="180" progress="0" visible="false"/>
+            <!-- Jar badge — class count + size (auto-hidden when no jar is loaded). -->
+            <HBox fx:id="jarBadge" styleClass="status-badge,status-badge-jar" alignment="CENTER_LEFT" spacing="4"
+                  visible="false" managed="false">
+                <FontIcon iconLiteral="mdi2a-archive-outline" iconSize="12"/>
+                <Label fx:id="jarBadgeLabel" text=""/>
+            </HBox>
+            <!-- Mapping badge — active mapping label (auto-hidden when no mapping). -->
+            <HBox fx:id="mappingBadge" styleClass="status-badge,status-badge-mapping" alignment="CENTER_LEFT" spacing="4"
+                  visible="false" managed="false">
+                <FontIcon iconLiteral="mdi2m-map-outline" iconSize="12"/>
+                <Label fx:id="mappingBadgeLabel" text=""/>
+            </HBox>
+            <!-- Cache badge — hit ratio; updates periodically. -->
+            <HBox fx:id="cacheBadge" styleClass="status-badge,status-badge-cache" alignment="CENTER_LEFT" spacing="4"
+                  visible="false" managed="false">
+                <FontIcon iconLiteral="mdi2d-database-outline" iconSize="12"/>
+                <Label fx:id="cacheBadgeLabel" text=""/>
+            </HBox>
+            <Label fx:id="statusRight" text="" maxWidth="480" styleClass="status-right"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

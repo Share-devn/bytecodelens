@@ -1,0 +1,36 @@
+# Build output
+.gradle/
+build/
+bin/
+out/
+
+# IDE / editor caches
+.idea/
+.vscode/
+.cache/
+.claude/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# JVM crash logs
+hs_err_pid*.log
+replay_pid*.log
+
+# Local session / handoff / setup notes — not for public repo
+SESSION_HANDOFF.md
+FEATURE_PARITY.md
+IMPL_PLAN.md
+GITHUB_SETUP.md
+
+# Local test jars (3rd-party, large, not for public repo)
+testdata/
+
